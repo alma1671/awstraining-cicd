@@ -28,7 +28,8 @@ jobs:
       - name: Calculate length
         id: length
         run: |
-          len=${#GITHUB_EVENT_INPUTS_LAST_NAME}
+          last="${{ github.event.inputs.last_name }}"
+          len=${#last}
           echo "last_len=$len" >> $GITHUB_OUTPUT
 
   show-summary:
