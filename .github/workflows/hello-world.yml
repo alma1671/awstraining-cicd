@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print first name
-        run: echo "First name: ${{ github.event.inputs.first_name }}"
+        run: "echo 'First name: ${{ github.event.inputs.first_name }}'"
 
   print-last-name:
     runs-on: ubuntu-latest
@@ -23,7 +23,7 @@ jobs:
       last_len: ${{ steps.length.outputs.last_len }}
     steps:
       - name: Print last name
-        run: echo "Last name: ${{ github.event.inputs.last_name }}"
+        run: "echo 'Last name: ${{ github.event.inputs.last_name }}'"
 
       - name: Calculate length
         id: length
@@ -37,4 +37,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Add summary
-        run: echo "Length of last name: ${{ needs.print-last-name.outputs.last_len }}" >> $GITHUB_STEP_SUMMARY
+        run: "echo 'Length of last name: ${{ needs.print-last-name.outputs.last_len }}'"
