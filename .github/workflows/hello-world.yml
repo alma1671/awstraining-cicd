@@ -1,0 +1,39 @@
+name: Hello World Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      first_name:
+        description: "Your first name"
+        required: true
+      last_name:
+        description: "Your last name"
+        required: true
+
+jobs:
+  print-first-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print first name
+        run: echo "First name: ${{ github.event.inputs.first_name }}"
+
+  print-last-name:
+    runs-on: ubuntu-latest
+    outputs:
+      last_len: ${{ steps.length.outputs.last_len }}
+    steps:
+      - name: Print last name
+        run: echo "Last name: ${{ github.event.inputs.last_name }}"
+
+      - name: Calculate length
+        id: length
+        run: |
+          len=${#GITHUB_EVENT_INPUTS_LAST_NAME}
+          echo "last_len=$len" >> $GITHUB_OUTPUT
+
+  show-summary:
+    needs: print-last-name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add summary
+        run: echo "Length of last name: ${{ needs.print-last-name.outputs.last_len }}" >> $GITHUB_STEP_SUMMARY
