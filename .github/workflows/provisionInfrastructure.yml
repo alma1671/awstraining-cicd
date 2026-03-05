@@ -1,5 +1,5 @@
-name: Apply infrastructure with Terraform
-run-name: Apply infrastructure with Terraform
+name: Provision infrastructure with Terraform
+run-name: Provision infrastructure with Terraform
 
 on:
   workflow_dispatch:
