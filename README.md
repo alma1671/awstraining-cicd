@@ -27,7 +27,7 @@ Slides can be found under:
 If not, then edit workflow file and just add some dummy commit data to make it visible for GitHub.
 
 3. Clone fork to your computer
-4. Replace **<<ACCOUNT_ID>>** in the whole project with your AWS Account ID
+4. Replace **283179119980** in the whole project with your AWS Account ID
 5. Go to ```aws-infrastructure/terraform/wrapper.properties``` file and set **UNIQUE_BUCKET_STRING** to some unique value that will be used as your Terraform state bucekt name
 6. Go to Settings -> Secrets and variables and setup AWS credentials
    * BACKEND_EMEA_TEST_AWS_KEY
@@ -159,7 +159,7 @@ Please adjust path to point to your custom action repository.
 5. Execute your "Greet workflow"
 
 # Datacenter Map
-Remember to adjust **<<ACCOUNT_ID>>** in workflow before execution.
+Remember to adjust **283179119980** in workflow before execution.
 
 ```yaml
 name: Datacenter map
@@ -209,7 +209,7 @@ jobs:
               "BACKEND_EMEA_TEST": {
                  "HUB": "EMEA",
                  "STAGE": "TEST",
-                 "AWS_ACCOUNT": "<<ACCOUNT_ID>>",
+                 "AWS_ACCOUNT": "283179119980",
                  "PROFILE": "backend-test",
                  "REGION": "eu-central-1",
                  "CLUSTER_NAME": "backend-ecs-test",
@@ -219,7 +219,7 @@ jobs:
               "BACKEND_US_TEST": {
                  "HUB": "US",
                  "STAGE": "TEST",
-                 "AWS_ACCOUNT": "<<ACCOUNT_ID>>",
+                 "AWS_ACCOUNT": "283179119980",
                  "PROFILE": "backend-test",
                  "REGION": "us-east-1",
                  "CLUSTER_NAME": "backend-ecs-test",
@@ -260,7 +260,7 @@ You also need to make sure that our smoke tests will be calling our application.
 The access to our application occurs via load balancer. You have to copy **DNS of the load balancer** by going to AWS -> EC2 -> Load balancers and selecting the DNS of our application load balancer. Thi DNS must be then added to the **EMEA-TEST-config.properties** file in our project. Just replace the **<<TODO: set url>>** placeholder. **REMEMBER TO PUSH YOUR CHANGES!**
 
 Make sure that you have also:
-* Replaced <<ACCOUNT_ID>> in the whole project (replace all in all files) with your AWS Account ID
+* Replaced 283179119980 in the whole project (replace all in all files) with your AWS Account ID
   * **REMEMBER!** Push all changes to your forked repository!
 * Set AWS credentials in GitHub Settings
 
