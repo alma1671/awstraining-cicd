@@ -28,19 +28,19 @@ jobs:
       AWS_KEY: ${{ secrets[format('{0}_AWS_KEY', inputs.hubEnv)] }}
       AWS_SECRET: ${{ secrets[format('{0}_AWS_SECRET', inputs.hubEnv)] }}
       AWS_REGION: ${{ needs.properties.outputs.REGION }}
-
+      TERRAFORM_VERSION: 1.5.7
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
-          fetch-depth: 0
+         # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
 
-      - name: Install Terraform ${{ env.terraform_version }}
+      - name: Install Terraform ${{ env.TERRAFORM_VERSION }}
         uses: hashicorp/setup-terraform@v2
         with:
-          terraform_version: 1.5.7
-          terraform_wrapper: false
+        TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
+        terraform_wrapper: false
 
       - name: Configure AWS profile
         run: |

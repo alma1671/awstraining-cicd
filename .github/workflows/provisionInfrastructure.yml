@@ -1,5 +1,5 @@
-name: Provision with Terraform
-run-name: Provision with Terraform
+name: Apply infrastructure with Terraform
+run-name: Apply infrastructure with Terraform
 
 on:
   workflow_dispatch:
@@ -28,19 +28,19 @@ jobs:
       AWS_KEY: ${{ secrets[format('{0}_AWS_KEY', inputs.hubEnv)] }}
       AWS_SECRET: ${{ secrets[format('{0}_AWS_SECRET', inputs.hubEnv)] }}
       AWS_REGION: ${{ needs.properties.outputs.REGION }}
-
+      TERRAFORM_VERSION: 1.5.7
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          # Disabling shallow clone is recommended for improving relevancy of reporting
-          fetch-depth: 0
+         # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
 
-      - name: Install Terraform ${{ env.terraform_version }}
+      - name: Install Terraform ${{ env.TERRAFORM_VERSION }}
         uses: hashicorp/setup-terraform@v2
         with:
-          TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
-          terraform_wrapper: false
+        TERRAFORM_VERSION: ${{ env.TERRAFORM_VERSION }}
+        terraform_wrapper: false
 
       - name: Configure AWS profile
         run: |
@@ -54,4 +54,3 @@ jobs:
           chmod +x setup_new_region.sh
           chmod +x w2.sh
           ./setup_new_region.sh w2.sh ${{ env.AWS_PROFILE }} ${{ env.AWS_REGION }} apply -auto-approve
-#coms
