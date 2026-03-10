@@ -80,7 +80,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Deploy Amazon ECS task definition
-        uses: aws-actions/amazon-ecs-deploy-task-definition@v8
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: assembly-fargate/src/main/resources/fargate/BACKEND_EMEA_TEST/task.json
           service: ${{ env.SERVICE_NAME }}
@@ -88,7 +88,7 @@ jobs:
           wait-for-service-stability: true
 
       - name: Run smoke tests
-        if: ${{ !env.SKIP_SMOKE_TESTS }}
+        if: ${{ env.SKIP_SMOKE_TESTS != 'true' }}
         run: |
           mvn -f pom.xml clean test -P st,BACKEND_EMEA_TEST
 
