@@ -83,6 +83,7 @@ jobs:
       - name: Replace secret placeholder in task definition
         run: |
           sed -i "s|<<TODO: set ARN of secrets manager>>|backend-secretsmanager-${STAGE}-${REGION}|g" assembly-fargate/src/main/resources/fargate/BACKEND_EMEA_TEST/task.json
+          sed -i "s|8081|8080|g" assembly-fargate/src/main/resources/fargate/BACKEND_EMEA_TEST/task.json
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
