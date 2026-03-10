@@ -34,6 +34,7 @@ jobs:
       REGION: ${{ needs.properties.outputs.REGION }}
       CLUSTER_NAME: ${{ needs.properties.outputs.CLUSTER_NAME }}
       SERVICE_NAME: ${{ needs.properties.outputs.SERVICE_NAME }}
+      STAGE: ${{ needs.properties.outputs.STAGE }}
       SKIP_SMOKE_TESTS: ${{ github.event.inputs.skipSmokeTests == 'true' }}
       SMOKETEST_BACKEND_PASSWORD: ${{ secrets.BACKEND_EMEA_TEST_SMOKETEST_BACKEND_PASSWORD }}
     steps:
@@ -78,6 +79,10 @@ jobs:
           docker tag backend:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+
+      - name: Replace secret placeholder in task definition
+        run: |
+          sed -i "s|<<TODO: set ARN of secrets manager>>|backend-secretsmanager-${STAGE}-${REGION}|g" assembly-fargate/src/main/resources/fargate/BACKEND_EMEA_TEST/task.json
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
