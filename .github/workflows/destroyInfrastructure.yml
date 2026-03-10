@@ -22,6 +22,7 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     needs: properties
+    environment: ${{ inputs.hubEnv }}
     env:
       AWS_ACCOUNT: ${{ needs.properties.outputs.AWS_ACCOUNT }}
       AWS_PROFILE: ${{ needs.properties.outputs.PROFILE }}
