@@ -38,8 +38,8 @@ resource "aws_lb" "backend_ecs_lb" {
 
 # Target Group for LoadBalancer
 resource "aws_lb_target_group" "backend_ecs_lb_target_group" {
-  name                 = "backend-tg"
-  port                 = 8081
+  name                 = "backend-test-tg"
+  port                 = 8080
   protocol             = "HTTP"
   target_type          = "ip"
   vpc_id               = var.aws_vpc_id
