@@ -1,32 +1,32 @@
-#name: Multibranch pipeline
-#run-name: Multibranch ${{ github.head_ref || github.ref_name }}
-#
-#on:
-#  push:
-#    branches:
-#      - main
-#      - release/*
-#      - feature/*
-#      - bugfix/*
-#  workflow_dispatch:
-#    inputs:
-#      skipSmokeTests:
-#        description: Should skip smoke tests?
-#        type: boolean
-#        required: false
-#        default: false
-#
-#jobs:
-#  properties:
+name: Multibranch pipeline
+run-name: Multibranch ${{ github.head_ref || github.ref_name }}
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+      - feature/*
+      - bugfix/*
+  workflow_dispatch:
+    inputs:
+      skipSmokeTests:
+        description: Should skip smoke tests?
+        type: boolean
+        required: false
+        default: false
+
+jobs:
+ # properties:
 #    #    TODO call datacenterMap reusable workflow to get AWS_ACCOUNT, PROFILE, REGION and other variables based on hubEnv input
-#
+
 #  buildTestDeploy:
-#    #    TODO Checkout, JDK 17 setup, Maven setup, Build with JaCoCo, Configure AWS credentials, Login to Amazon ECR, Push image to Amazon ECR, Deploy Amazon ECS task definition, Run smoke tests if not skipped
-#
-#  pipelinePassed:
-#    runs-on: ubuntu-latest
-#    needs: buildTestDeploy
-#    steps:
-#      - name: All passed
-#        run: |
-#          echo "All steps have passed."
+    #    TODO Checkout, JDK 17 setup, Maven setup, Build with JaCoCo, Configure AWS credentials, Login to Amazon ECR, Push image to Amazon ECR, Deploy Amazon ECS task definition, Run smoke tests if not skipped
+
+  pipelinePassed:
+    runs-on: ubuntu-latest
+    needs: buildTestDeploy
+    steps:
+      - name: All passed
+        run: |
+          echo "All steps have passed."
