@@ -28,7 +28,7 @@ jobs:
     needs: properties
     env:
       AWS_ACCOUNT: ${{ needs.properties.outputs.AWS_ACCOUNT }}
-      AWS_KEY:  ${{ secrets.BACKEND_EMEA_TEST_AWS_KEY }}
+      AWS_KEY: ${{ secrets.BACKEND_EMEA_TEST_AWS_KEY }}
       AWS_SECRET: ${{ secrets.BACKEND_EMEA_TEST_AWS_SECRET }}
       REGION: ${{ needs.properties.outputs.REGION }}
       CLUSTER_NAME: ${{ needs.properties.outputs.CLUSTER_NAME }}
@@ -57,7 +57,7 @@ jobs:
         run: mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package org.jacoco:jacoco-maven-plugin:report
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v2
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ env.AWS_KEY }}
           aws-secret-access-key: ${{ env.AWS_SECRET }}
