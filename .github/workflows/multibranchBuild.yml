@@ -26,6 +26,7 @@ jobs:
   buildTestDeploy:
     runs-on: ubuntu-latest
     needs: properties
+    environment: aws
     env:
       AWS_ACCOUNT: ${{ needs.properties.outputs.AWS_ACCOUNT }}
       AWS_KEY: ${{ secrets.BACKEND_EMEA_TEST_AWS_KEY }}
