@@ -44,6 +44,10 @@ jobs:
 
       - name: Configure AWS profile
         run: |
+          if [[ -z "${{ env.AWS_KEY }}" ]] || [[ -z "${{ env.AWS_SECRET }}" ]]; then
+            echo "::error::AWS credentials are empty. Please check secrets: ${{ format('{0}_AWS_KEY', inputs.hubEnv) }} and ${{ format('{0}_AWS_SECRET', inputs.hubEnv) }}"
+            exit 1
+          fi
           mkdir -p ~/.aws
           echo "[${{ env.AWS_PROFILE }}]" > ~/.aws/credentials
           echo "aws_access_key_id = ${{ env.AWS_KEY }}" >> ~/.aws/credentials
